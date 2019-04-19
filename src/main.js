@@ -1,12 +1,16 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import VueResource from 'vue-resource'//发包用
+// import VueResource from 'vue-resource'//发包用,以淘汰
+import axios from 'axios'
 import VueRouter from 'vue-router'
 import App from './App'
 import Routes from './routes'
 Vue.config.productionTip = false
-Vue.use(VueResource)//使用引入的插件
+// Vue.use(VueResource)//使用引入的插件
+//配置全局url
+axios.defaults.baseURL="https://jsonplaceholder.typicode.com/"
+axios.defaults.headers.common['Authorization']='token'//往请求头添加token
 Vue.use(VueRouter)
 
 //自定义指令,也可写到局部文件里当作属性directive:{}

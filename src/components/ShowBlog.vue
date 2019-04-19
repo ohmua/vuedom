@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import axios from "axios"
 export default {
   name: 'show-blog',
   data(){
@@ -30,10 +31,10 @@ export default {
   },
   created (){
       //请求数据
-      this.$http.get('https://jsonplaceholder.typicode.com/posts')
-      .then(function(data){
-          this.blogs=data.body.slice(0,10)
-        //   console.log(this.blogs)
+      // this.$http.get('https://jsonplaceholder.typicode.com/posts')
+        var _this=this;
+        axios.get("posts").then((data)=>{
+           _this.blogs=data.data.slice(0,10)
       })
     //   this.$http.get("./../static/文件名") .then(function(){}),本地json文件要放到static里面
   },
@@ -53,7 +54,7 @@ export default {
 }
 </script>
 
-<style>
+<style >
 #show-blog{
     max-width: 800px;
     margin: 0 auto;

@@ -36,7 +36,7 @@
         <p>{{blog.content}}</p>
         <p>博客分类：</p>
         <ul>
-            <li v-for="categroy in blog.categories" id="select-cat">
+            <li v-for="categroy in blog.categories">
                 {{categroy}}
             </li>
         </ul>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import axios from "axios"
 export default {
   name: 'add-blog',
   data () {
@@ -62,14 +63,17 @@ export default {
   },
   methods:{
     post:function(){
-      this.$http.post("http://jsonplaceholder.typicode.com/posts",{
+      // this.$http.post("http://jsonplaceholder.typicode.com/posts",{
+        //axios替换vue.resouce,此时的then要用es6语法
+        var _this=this;
+        axios.post("posts",{
         title:this.blog.title,
         author:this.blog.author,
         body:this.blog.content,
         userId:1
-      }).then(function(data){//post请求成功之后执行
+      }).then((data)=>{//post请求成功之后执行
         // console.log(data);
-        this.submmited=true;
+        _this.submmited=true;//用axios时this指向拥有这个函数的对象，所以要对this做处理
       });
     }
   }
